@@ -32,7 +32,7 @@ def gen(filename):
     # Capture frame-by-frame
         ret, frame = cap.read()
         if ret == True:
-            frame = cv2.resize(frame, (frame_width, frame_height))
+            #frame = cv2.resize(frame, (frame_width, frame_height))
             # Display the resulting frame
             # cv2.imshow('Frame', frame)
             
@@ -226,7 +226,7 @@ def main():
         # print(vis_img.shape)
         
         # if args.show:
-        #     cv2.imshow('Image', vis_img)
+        cv2.imshow('Image', vis_img)
 
         # if save_out_video:
         out.write(vis_img)
