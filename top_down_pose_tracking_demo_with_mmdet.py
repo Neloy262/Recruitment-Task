@@ -18,7 +18,7 @@ except (ImportError, ModuleNotFoundError):
 
 frame_width = 500
 frame_height = 500
-out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+out = cv2.VideoWriter('output2.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 # Generator function to generate each frame
 def gen(filename):
@@ -60,17 +60,17 @@ def main():
     parser.add_argument('det_checkpoint', help='Checkpoint file for detection')
     parser.add_argument('pose_config', help='Config file for pose')
     parser.add_argument('pose_checkpoint', help='Checkpoint file for pose')
-    parser.add_argument('--video-path', type=str, help='Video path')
+    # parser.add_argument('--video-path', type=str, help='Video path')
     parser.add_argument(
         '--show',
         action='store_true',
         default=True,
         help='whether to show visualizations.')
-    parser.add_argument(
-        '--out-video-root',
-        default='',
-        help='Root of the output video file. '
-        'Default not saving the visualization video.')
+    # parser.add_argument(
+    #     '--out-video-root',
+    #     default='',
+    #     help='Root of the output video file. '
+    #     'Default not saving the visualization video.')
     parser.add_argument(
         '--device', default='cuda:0', help='Device used for inference')
     parser.add_argument(
@@ -128,26 +128,26 @@ def main():
     else:
         dataset_info = DatasetInfo(dataset_info)
 
-    cap = cv2.VideoCapture(args.video_path)
+    # cap = cv2.VideoCapture(args.video_path)
     fps = None
 
-    assert cap.isOpened(), f'Faild to load video file {args.video_path}'
+    # assert cap.isOpened(), f'Faild to load video file {args.video_path}'
 
-    if args.out_video_root == '':
-        save_out_video = False
-    else:
-        os.makedirs(args.out_video_root, exist_ok=True)
-        save_out_video = True # Make True to save ouput file
+    # if args.out_video_root == '':
+    #     save_out_video = False
+    # else:
+    #     os.makedirs(args.out_video_root, exist_ok=True)
+    #     save_out_video = True # Make True to save ouput file
 
-    if save_out_video:
-        fps = cap.get(cv2.CAP_PROP_FPS)
-        size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
-                int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        videoWriter = cv2.VideoWriter(
-            os.path.join(args.out_video_root,
-                         f'vis_{os.path.basename(args.video_path)}'), fourcc,
-            fps, size)
+    # if save_out_video:
+    #     fps = cap.get(cv2.CAP_PROP_FPS)
+    #     size = (int(cap.get(cv2.CAP_PROP_FRAME_WIDTH)),
+    #             int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+    #     fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    #     videoWriter = cv2.VideoWriter(
+    #         os.path.join(args.out_video_root,
+    #                      f'vis_{os.path.basename(args.video_path)}'), fourcc,
+    #         fps, size)
 
     # optional
     return_heatmap = False
@@ -228,8 +228,8 @@ def main():
         # if args.show:
         #     cv2.imshow('Image', vis_img)
 
-        if save_out_video:
-            out.write(vis_img)
+        # if save_out_video:
+        out.write(vis_img)
             
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
