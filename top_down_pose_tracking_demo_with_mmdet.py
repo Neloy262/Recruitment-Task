@@ -18,7 +18,9 @@ except (ImportError, ModuleNotFoundError):
 
 frame_width = 500
 frame_height = 500
-out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+out = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
+
+# Generator function to generate each frame
 def gen(filename):
     cap = cv2.VideoCapture(filename)
 
@@ -156,9 +158,12 @@ def main():
     next_id = 0
     pose_results = []
     # while (cap.isOpened()):
+
+    # Loop through four frames at a time, merge them and insert into mmpose mmdet pipeline
     for a,b,c,d in zip_longest(gen("1.mp4"),gen("2.mp4"),gen("3.mp4"),gen("4.mp4")):
         pose_results_last = pose_results
 
+        # if any video return None create a new frame with all zeros
         if a is None:
             a = np.zeros([frame_height,frame_width,3],dtype=np.uint8)
         if b is  None:
@@ -170,6 +175,8 @@ def main():
         
         # print("d:",d)
         # print(type(a))
+
+        # creating new image using four frames
         a = np.hstack((a,b))
         b = np.hstack((c,d))
         img = np.vstack((a,b))
