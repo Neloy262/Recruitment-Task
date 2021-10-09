@@ -7,3 +7,6 @@ Before running the main file please make sure all four videos are in the same lo
 
 Command to run the code - python top_down_pose_tracking_demo_with_mmdet.py {location of mmdet config file} {location of mmdet ckpt file} 
 {location of mmpose config file} {location of mmdet ckpt file}
+
+In the main python file I have set the frame_width and frame_height as 500. This is because if I set it to 1920x1080 I run out of gpu memory.
+
