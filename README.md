@@ -13,3 +13,5 @@ Command to run the code - python script.py {location of mmdet config file} {loca
 
 In the main python file I have set the frame_width and frame_height as 500. This is because if I set it to 1920x1080 I run out of gpu memory.
 
+Complete command that I used to run the file - python script.py mmdet_config/faster_rcnn_r50_fpn_coco.py mmdet_ckpt/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth mmpose_config/res50_coco_256x192.py mmpose_ckpt/res50_coco_256x192-ec54d7f3_20200709.pth
+
